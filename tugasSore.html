@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="jssore.js" defer></script>
+    <link rel="stylesheet" href="csssore.css">
+    <title>FORM</title>
+</head>
+<body onload="loadDummy()">
+    
+    <div class="container">
+        <div class="fromContainer">
+            <div class="judul">
+                <span>Form</span>
+                <hr />
+            </div>
+            <form action="" name="form-data" class="form-data" >
+                <input name ="update-id" id="update-id" type="hidden" > </input>
+                <div class="field">
+                    <div class="label">
+                        <labeL for="nama">Nama  </label>
+                    </div>
+                    <div class="input">
+                        <input class="input-nama input-hover" type="text" name ="nama" id="nama" required> </input>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="label">
+
+                        <labeL > TTL</label> 
+                    </div>
+                    <div class="input">
+                        <input class="input-tempat input-hover" type="text" name = "tempat" id="tempat" required> </input>
+                        <input class="input-ttl input-hover" type="date" name = "ttl" id="ttl" required> </input>
+                    </div>     
+                </div>
+                <div class="field">
+                    <div class="label">
+                        <labeL for="jenis-kelamin" > Jenis Kelamin</label>
+                    </div>
+                    <div class="input">
+                        <labeL for="L"> L </label>
+                        <input type="radio" name="jenis-kelamin" id="laki-laki" value="L" required>
+                        <labeL for="P"> P</label>
+                        <input type="radio" name="jenis-kelamin" id="perempuan" value="P">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="label">
+                        <labeL for="hobby"> Hobby </label>
+
+                    </div>
+                    <div class="input">
+                        <label for="berenang">Berenang</label>
+                        <input type="checkbox" name="hobby" id="berenang" value="Berenang">
+                        <label for="jogging">Jogging</label>
+                        <input type="checkbox" name="hobby" id="jogging" value="Jogging">
+                        <label for="bersepeda">Bersepeda</label>
+                        <input type="checkbox" name="hobby" id="bersepeda" value="Bersepeda">
+                        <label for="fustsal">Futsal</label>
+                        <input type="checkbox" name="hobby" id="fustsal" value="Futsal">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="label">
+
+                        <labeL for="agama"> Agama</label>
+                    </div>
+                    <div class="input">
+                        <select name="agama" id="agama" class="input-nama input-hover" required>
+                            <option value="islam">Islam</option>
+                            <option value="kristen">Kristen</option>
+                            <option value="hindu">Hindu</option>
+                            <option value="budha">Budha</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="label">
+                        <labeL for="alamat"> Alamat</label>
+
+                    </div>
+                    <div class="input">
+                        <textarea name="alamat" id="alamat" cols="30" rows="5" class="input-nama input-hover" required></textarea>
+
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="input">
+                        <input type="submit" value="Submit" id="tombol-submit" class="input-nama input-submit input-submit-hover">  
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="tableContainer">
+            <div class="judul-table">
+                    <span>Tabel</span>
+            </div>
+            <div class="menu-table">
+                <input type="text" id="nama-target" onkeyup="seacrhByName()" placeholder="Search..">
+            </div>
+            <table class="table-people" cellpadding="5" border="1" cellspacing="0">
+                <thead class="table-header">
+                    <tr>
+                        <th class="header-nomer"> No </th>
+                        <th class="header-nama"> Nama </th>
+                        <th class="header-umur"> Umur </th>
+                        <th class="header-jenis-kelamin"> Jenis Kelamin </th>
+                        <th class="header-hobi"> Hobby </th>
+                        <th class="header-agama"> Agama </th>
+                        <th class="header-alamat"> Alamat </th>
+                        <th class="header-action"> Action </th>
+                    </tr>
+                </thead>
+                <tbody id="bodyTable">
+                </tbody>
+            </table>
+            <div class="navigation-table">
+                <button id="clear" onclick="prevPage()" class="navigation-button">PREV</button>
+                <button id="clear" onclick="startPage()" class="navigation-button">START</button>
+                <button id="clear" onclick="nextPage()" class="navigation-button">NEXT</button>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

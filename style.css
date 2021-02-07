@@ -1,0 +1,91 @@
+body {
+    background-color: #dff8ff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.container{
+	display: flex;
+    padding: 1%;
+    margin: 1%;
+    flex-direction: column;
+}
+.atas {
+    display: flex;
+    flex-direction: row;
+}
+input {
+    width: 198px;
+}
+
+.tableContainer {
+    
+    width: 80%;
+    height: 420px;
+    
+}
+.form{
+	width: 550px;
+    height: 250px;
+    margin-bottom: 17px;
+    border-radius: 0px 30px 0px 30px;
+    background-color: mediumaquamarine;
+    padding: 12px;
+}
+
+thead {
+    background-color: bisque;
+}
+tbody {
+    background-color: #dadada;
+}
+.bodyTabel {
+    height: 332px;
+}
+.field{
+	margin-bottom: 12px;
+	display: flex;
+}
+.judul{
+	display: flex;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 12px;
+	
+}
+.label{
+	margin-right: 12px;
+	width: 70px;
+}
+#button {
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 7px;
+}
+#button:hover {
+    cursor: pointer;
+    background-color: grey;
+}
+#clear {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 7px;
+}
+#clear:hover {
+    cursor: pointer;
+    background-color: rgb(255, 78, 78);
+}
+.button{
+	margin-bottom: 12px;
+	padding: 2px;
+}
+.center{
+	width: 200px;
+	text-align: center;
+}
+.headNomer{
+	width: 30px;
+	text-align: center;
+}
+
