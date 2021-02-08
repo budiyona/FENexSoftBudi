@@ -1,7 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { Component } from 'react';
-
+import Menu from './component/menu'
+import {Footer, Header, Nav} from './template'
 class App extends Component {
   render() { 
     let obj = {id: 1, nama:"saya"}
@@ -11,7 +11,11 @@ class App extends Component {
     }
     return ( 
       <>
-      <div>
+      <Footer />
+      <Header />
+      <Nav />
+      <Menu />
+      <div className="bgBaru">
         Hello World
       </div>
       <div>
