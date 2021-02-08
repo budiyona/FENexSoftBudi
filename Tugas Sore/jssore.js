@@ -138,8 +138,13 @@ function loadDummy() {
 function clearTable() {
     bodyTable.innerHTML = ``
 }
+console.log(form.hobby);
 function inputData(e) {
     e.preventDefault()
+    
+    form.hobby.forEach(el =>{
+        console.log(el);
+    })
     let formHobbies = Array.prototype.slice.call(form.hobby)
     let person = {
         id: 0,
@@ -218,6 +223,7 @@ function showPerson(person) {
 }
 
 function deletePeople(id) {
+    clearForm()
     people = people.filter(person => {
         return person.id != id
     })
@@ -286,7 +292,6 @@ function seacrhByName() {
     console.log("lengtTarget"+target.length);
     people.forEach((person) => {
         let result = person.name.toLowerCase().match(regPattern)
-
         console.log(result);
         console.log(typeof(result));
         if(result!=null){
@@ -335,20 +340,24 @@ function checkStartValue(start) {
     return currentStart
 }
 
-function clearForm() {
-    form['update-id'].value = 0
-    form.nama.value = ""
-    form.tempat.value = ""
-    form.ttl.value = null
-    clearRadioAndCheckBox()
-    form.agama.value = ""
-    form.alamat.value = ""
-}
+// function clearForm() {
+//     form['update-id'].value = 0
+//     form.nama.value = ""
+//     form.tempat.value = ""
+//     form.ttl.value = null
+//     clearRadioAndCheckBox()
+//     form.agama.value = ""
+//     form.alamat.value = ""
+// }
 
-function clearRadioAndCheckBox() {
-    for(let i =0;i<=3;i++){
-        form.hobby[i].checked = false
-    }
-    document.querySelector('#laki-laki').checked=false
-    document.querySelector('#perempuan').checked=false
+// function clearRadioAndCheckBox() {
+//     for(let i =0;i<=3;i++){
+//         form.hobby[i].checked = false
+//     }
+//     document.querySelector('#laki-laki').checked=false
+//     document.querySelector('#perempuan').checked=false
+// }
+
+function clearForm() {
+    form.reset()
 }
