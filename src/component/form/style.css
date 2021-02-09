@@ -1,0 +1,19 @@
+.form{
+    display: flex;
+    flex-direction: column;
+}
+.jenis-kelamin{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+.field{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.max-width{
+    width: 100%;
+}
+.std-input{
+    width: 100%;
+}
