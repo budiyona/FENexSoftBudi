@@ -22,10 +22,10 @@ class Table extends Component {
                 }
                 )
             }else{
-                let datarow = isi.map( isidata =>{
-                    console.log("isi data",isidata);
+                let datarow = isi.map( (isidata, idx) =>{
+                    // console.log("isi data",isidata);
                     return(
-                        <Td position={this.state.center}>{isidata}</Td>
+                        <Td position={this.state.center} key={idx}>{isidata} </Td>
                     )
                 }
                 )
@@ -36,7 +36,7 @@ class Table extends Component {
                 ) 
             }
         });
-        header.forEach(isi=>{console.log(isi);})
+        // header.forEach(isi=>{console.log(isi);})
         return ( 
             <table cellPadding="5" border="1" cellSpacing="0">
                 <thead>

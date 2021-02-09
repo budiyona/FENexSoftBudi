@@ -7,7 +7,7 @@ class Hobby extends Component {
         this.state = { check: "checkbox" }
     }
     render() { 
-        const {hover} = this.props
+        const {hover , onClick} = this.props
         return ( 
         <div>
             <div className="field">
@@ -15,13 +15,13 @@ class Hobby extends Component {
             </div>
             <div className="field">
                 <Label > Berenang </Label>
-                <Input typeInput={this.state.check} hover={hover}/>
+                <Input typeInput={this.state.check} hover={hover} onClick={onClick} name="berenang"/>
                 <Label > Bersepeda </Label>
-                <Input typeInput={this.state.check} hover={hover}/>
+                <Input typeInput={this.state.check} hover={hover} onClick={onClick} name="bersepeda"/>
                 <Label > joging </Label>
-                <Input typeInput={this.state.check} hover={hover}/>
+                <Input typeInput={this.state.check} hover={hover} onClick={onClick} name="jogging"/>
                 <Label > Futsal </Label>
-                <Input typeInput={this.state.check}/>
+                <Input typeInput={this.state.check} hover={hover} onClick={onClick} name="futsal"/>
             </div>
         </div> 
         );

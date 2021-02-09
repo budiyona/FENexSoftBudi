@@ -9,7 +9,7 @@ class JenisKelamin extends Component {
           }
     }
     render() { 
-        const {hover} = this.props
+        const {hover ,name, onChange} = this.props
         return ( 
             <div className="jenis-kelamin">
                 <div className="field">
@@ -17,9 +17,9 @@ class JenisKelamin extends Component {
                 </div>
                 <div className="field">
                     <Label > Laki-Laki </Label>
-                    <Input typeInput={this.state.radio} hover={hover}/>
+                    <Input typeInput={this.state.radio} hover={hover} name={name} value="L" onChange={onChange}/>
                     <Label > Perempuan </Label>
-                    <Input typeInput={this.state.radio} hover={hover}/>
+                    <Input typeInput={this.state.radio} hover={hover} name={name} value="P" onChange={onChange}/>
                 </div>
             </div>
          );

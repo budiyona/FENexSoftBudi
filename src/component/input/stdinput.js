@@ -7,9 +7,17 @@ class Input extends Component {
          }
     }
     render() { 
-        const {typeInput, maxWidth, hover} = this.props
+        const {typeInput, maxWidth, hover, onChange, value, onClick, name} = this.props
         return ( 
-            <input className={maxWidth+" "+hover} type={typeInput} required/>
+            <input 
+                className={maxWidth + " " + hover} 
+                type={typeInput} 
+                onChange={onChange} 
+                value={value} 
+                onClick={onClick} 
+                name={name}
+            />
+
         );
     }
 }

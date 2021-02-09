@@ -6,9 +6,9 @@ class TextArea extends Component {
         this.state = {  }
     }
     render() { 
-        const {hover} = this.props
+        const {hover, onChange, name} = this.props
         return ( 
-            <textarea className={hover}/>
+            <textarea className={hover} onChange={onChange} name={name}/>
          );
     }
 }

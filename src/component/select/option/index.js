@@ -5,10 +5,16 @@ class Option extends Component {
         this.state = {  }
     }
     render() { 
-        const{children,classes} = this.props
-        return ( 
-            <option value={classes}>{children}</option>
-         );
+        const{children,classes, disable} = this.props
+        if(disable){
+            return ( 
+                <option value={classes} disabled selected>{children} </option>
+             );
+        }else{
+            return ( 
+                <option value={classes} >{children}</option>
+             );
+        }
     }
 }
  
