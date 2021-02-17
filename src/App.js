@@ -9,6 +9,8 @@ class App extends Component {
             albums: [],
             photos: [],
             loading: true,
+            loadingAlbum: false,
+            loadingPhotos: false,
             userEdit: {},
             album: {},
             albumphotos: [],
@@ -23,37 +25,17 @@ class App extends Component {
     }
 
     componentDidMount() {
-        Promise.all([
-            fetch('https://jsonplaceholder.typicode.com/users'),
-            fetch('https://jsonplaceholder.typicode.com/albums'),
-            fetch('https://jsonplaceholder.typicode.com/photos')
-        ])
-            .then(([res1, res2, res3]) => Promise.all([res1.json(), res2.json(), res3.json()]))
-            .then(([json1, json2, json3]) => this.setState({
-                users: json1,
-                albums: json2,
-                photos: json3,
-                loading: false
-            })).finally(
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(json => this.setState({ users: json, loading: false }))
+            .catch(() => {
+                alert("failed to fetch data")
+            })
+            .finally(
                 this.setState({
                     loading: true
                 })
             )
-        // .then(([json1,json2,json3])=>console.log(json1))
-        // .catch(()=> alert("failed to fetch data")).finally(this.setState({
-        //     loading: true
-        // }))
-        // fetch('https://jsonplaceholder.typicode.com/users')
-        //     .then(response => response.json())
-        //     .then(json => this.setState({ users: json, loading: false }))
-        //     .catch(() => {
-        //         alert("failed to fetch data")
-        //     })
-        //     .finally(
-        //         this.setState({
-        //             loading: true
-        //         })
-        //     )
     }
     deleteData = (id) => {
         console.log("loaddiiiiiing", id);
@@ -69,7 +51,6 @@ class App extends Component {
         console.log("update");
         let tmp = this.state.users
         let targetEdit = tmp.find(el => el.id === idUser)
-        // console.log("target ediiiit", targetEdit);
         this.setState({
             userEdit: targetEdit,
             name: targetEdit.name,
@@ -81,21 +62,22 @@ class App extends Component {
         })
     }
     showAllbum = (id) => {
-        let tmp = this.state.albums
-        // let tmptfoto = this.state.photos
-        let target = tmp.filter(el => el.userId === id)
-        // let targetPhoto = tmptfoto.filter(el => el.albumId === target.id)
-        this.setState({
-            userAlbum: target,
-            // albumphotos: targetPhoto
-        })
+        let url = 'https://jsonplaceholder.typicode.com/users/' + id + '/albums'
+        fetch(url)
+            .then(response => response.json())
+            .then(json => this.setState({ userAlbum: json, loading: false }))
+            .catch(() => {
+                alert("failed to fetch data")
+            })
     }
     showPhotos = (idAlbum) => {
-        let tmptfoto = this.state.photos
-        let targetPhoto = tmptfoto.filter(el => el.albumId === idAlbum)
-        this.setState({
-            albumphotos: targetPhoto
-        })
+        let url = 'https://jsonplaceholder.typicode.com/albums/' + idAlbum + '/photos'
+        fetch(url)
+            .then(response => response.json())
+            .then(json => this.setState({ albumphotos: json, loading: false }))
+            .catch(() => {
+                alert("failed to fetch data")
+            })
     }
     setValue = (name, value) => {
         console.log("SET VALUE TRIGERED");
@@ -126,7 +108,7 @@ class App extends Component {
     }
     render() {
         const { name, addrCity, compName, uname, idEdit } = this.state
-        console.log("user ediiiiiit",this.state.userEdit);
+        console.log("user ediiiiiit", this.state.userEdit);
         let data = this.state.users.map((user, idx) => {
             return (
                 <tr key={idx}>
@@ -147,7 +129,7 @@ class App extends Component {
         return this.state.loading ? (<div>Loading</div>) :
             (
                 <div className="container">
-                    <FormEdit 
+                    <FormEdit
                         userEdit={this.state.userEdit}
                         user={{ name, uname, addrCity, compName, idEdit }}
                         onChange={this.setValue}
