@@ -1,38 +1,38 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container {
+  width: 100%;
+  height: 100%;
+  background: #e5ffda;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.atas {
+  margin: 10px auto;
+  background-color: white;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.bawah {
+  margin: 10px auto;
+  background-color: white;
+}
+.kotak-foto {
+  overflow: auto;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+figure {
+  display: inline-block;
+  width: 150px;
+  text-align: center;
+}
+th{
+  background-color: chartreuse;
+}
+tr,th,td{
+  text-align: center;
+  padding: 2px 5px;
+  box-sizing: border-box;
+}
+tr:hover{
+  background-color: cornflowerblue;
 }

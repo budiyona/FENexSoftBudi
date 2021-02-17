@@ -16,7 +16,8 @@ class App extends Component {
             uname: "",
             addrCity: "",
             compName: "",
-            idEdit: ""
+            idEdit: "",
+            userAlbum: []
 
         }
     }
@@ -80,11 +81,18 @@ class App extends Component {
     }
     showAllbum = (id) => {
         let tmp = this.state.albums
-        let tmptfoto = this.state.photos
-        let target = tmp.find(el => el.userId === id)
-        let targetPhoto = tmptfoto.filter(el => el.albumId === target.id)
+        // let tmptfoto = this.state.photos
+        let target = tmp.filter(el => el.userId === id)
+        // let targetPhoto = tmptfoto.filter(el => el.albumId === target.id)
         this.setState({
-            album: target,
+            userAlbum: target,
+            // albumphotos: targetPhoto
+        })
+    }
+    showPhotos = (idAlbum) => {
+        let tmptfoto = this.state.photos
+        let targetPhoto = tmptfoto.filter(el => el.albumId === idAlbum)
+        this.setState({
             albumphotos: targetPhoto
         })
     }
@@ -137,7 +145,8 @@ class App extends Component {
         return this.state.loading ? (<div>Loading</div>) :
             (
                 <div className="container">
-                    <FormEdit userEdit={this.state.userEdit}
+                    <FormEdit 
+                        userEdit={this.state.userEdit}
                         user={{ name, uname, addrCity, compName, idEdit }}
                         onChange={this.setValue}
                         saveUser={this.saveUser}
@@ -171,20 +180,29 @@ class App extends Component {
                             </thead>
                             <tbody>
                                 {
-                                    <>
-                                        <tr>
-                                            <td>{1}</td>
-                                            <td>{this.state.album.title}</td>
-                                            <td>{this.state.albumphotos.map((el, key) =>
-                                                <a href={el.url}>
-                                                    <input type="button" value={key} />
-                                                </a>)}
+                                    this.state.userAlbum.map((el, key) =>
+                                        <tr key={key}>
+                                            <td>{key + 1}</td>
+                                            <td>{el.title}</td>
+                                            <td>
+                                                <input type="button" value="Tampilkan Foto"
+                                                    onClick={() => this.showPhotos(el.id)} />
                                             </td>
                                         </tr>
-                                    </>
+                                    )
                                 }
                             </tbody>
                         </table>
+                    </div>
+                    <div className="kotak-foto">
+                        {
+                            this.state.albumphotos.map(el =>
+                                <figure>
+                                    <img src={el.thumbnailUrl} alt={el.title}></img>
+                                    <figcaption>{el.title}</figcaption>
+                                </figure>
+                            )
+                        }
                     </div>
 
                 </div>
