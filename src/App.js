@@ -69,6 +69,7 @@ class App extends Component {
         console.log("update");
         let tmp = this.state.users
         let targetEdit = tmp.find(el => el.id === idUser)
+        // console.log("target ediiiit", targetEdit);
         this.setState({
             userEdit: targetEdit,
             name: targetEdit.name,
@@ -125,6 +126,7 @@ class App extends Component {
     }
     render() {
         const { name, addrCity, compName, uname, idEdit } = this.state
+        console.log("user ediiiiiit",this.state.userEdit);
         let data = this.state.users.map((user, idx) => {
             return (
                 <tr key={idx}>

@@ -18,14 +18,14 @@ class FormEdit extends Component {
             return (
 
                 <>
-                    <input type="text" name="idEdit" id="" hidden value={user.idEdit}></input>
+                    <input type="text" name="idEdit" value={user.idEdit.name} onChange={this.setValue}></input>
                     <label >Name</label>
                     <input type="text" name="name" value={user.name} onChange={this.setValue}></input> <br />
-                    <label for="">Username</label>
+                    <label >Username</label>
                     <input type="text" name="uname" value={user.uname} onChange={this.setValue}></input> <br />
-                    <label for="">City</label>
+                    <label >City</label>
                     <input type="text" name="addrCity" value={user.addrCity} onChange={this.setValue}></input> <br />
-                    <label for="">Company Name</label>
+                    <label >Company Name</label>
                     <input type="text" name="compName" value={user.compName} onChange={this.setValue}></input><br />
                     <input type="button" value="Update" onClick={this.saveUser} />
                 </>
