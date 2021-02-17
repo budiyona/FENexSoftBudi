@@ -34,7 +34,7 @@ class App extends Component {
                 albums: json2,
                 photos: json3,
                 loading: false
-            })).finally(
+            })).catch(()=> alert("failed to fetch data")).finally(
                 this.setState({
                     loading: true
                 })
