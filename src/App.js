@@ -11,7 +11,13 @@ class App extends Component {
             loading: true,
             userEdit: {},
             album: {},
-            albumphotos: []
+            albumphotos: [],
+            name: "",
+            uname: "",
+            addrCity: "",
+            compName: "",
+            idEdit: ""
+
         }
     }
 
@@ -61,23 +67,56 @@ class App extends Component {
     updateUsers = (idUser) => {
         console.log("update");
         let tmp = this.state.users
-        let targetEdit = tmp.find(el=>el.id===idUser)
+        let targetEdit = tmp.find(el => el.id === idUser)
         this.setState({
-            userEdit: targetEdit
-            
+            userEdit: targetEdit,
+            name: targetEdit.name,
+            uname: targetEdit.username,
+            addrCity: targetEdit.address.city,
+            compName: targetEdit.company.name,
+            idEdit: targetEdit.id
+
         })
     }
-    showAllbum = (id) =>{
+    showAllbum = (id) => {
         let tmp = this.state.albums
         let tmptfoto = this.state.photos
-        let target = tmp.find(el=>el.userId===id)
-        let targetPhoto = tmptfoto.filter(el=>el.albumId===target.id)
+        let target = tmp.find(el => el.userId === id)
+        let targetPhoto = tmptfoto.filter(el => el.albumId === target.id)
         this.setState({
-            album:target,
+            album: target,
             albumphotos: targetPhoto
         })
     }
+    setValue = (name, value) => {
+        console.log("SET VALUE TRIGERED");
+        this.setState({
+            [name]: value
+        })
+
+    }
+    saveUser = (id) => {
+        console.log("save user");
+        let tmp = this.state.users
+        let idx = tmp.findIndex((el) => el.id === id)
+        let updateObject = this.state.userEdit
+        updateObject.name = this.state.name
+        updateObject.username = this.state.uname
+        updateObject.address.city = this.state.addrCity
+        updateObject.company.name = this.state.compName
+        tmp.splice(idx, 1, updateObject)
+        this.setState({
+            userEdit: {},
+            users: tmp,
+            name: "",
+            uname: "",
+            addrCity: "",
+            compName: "",
+            idEdit: ""
+        })
+    }
     render() {
+        const { name, addrCity, compName, uname, idEdit } = this.state
         let data = this.state.users.map((user, idx) => {
             return (
                 <tr key={idx}>
@@ -89,41 +128,66 @@ class App extends Component {
                     <td>
                         <input type="button" value="hapus"
                             onClick={() => this.deleteData(user.id)} />
-                        <input type="button" value="edit" onClick={()=>this.updateUsers(user.id)}/>
-                        <input type="button" value="Lihat" onClick={()=>this.showAllbum(user.id)} />
+                        <input type="button" value="edit" onClick={() => this.updateUsers(user.id)} />
+                        <input type="button" value="Lihat" onClick={() => this.showAllbum(user.id)} />
                     </td>
                 </tr>
             )
         })
         return this.state.loading ? (<div>Loading</div>) :
-            ( <>
-                <FormEdit userEdit={this.state.userEdit} onChange={this.setValue}></FormEdit>
-                <div className="App">
-                    <table cellPadding="0" cellSpacing="0" border="1" >
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Name</th>
-                                <th>Username</th>
-                                <th>City</th>
-                                <th>Company Name</th>
-                                <th>Action</th>
-                            </tr >
-                        </thead>
-                        <tbody>
-                            {data}
-                        </tbody>
-                    </table>
+            (
+                <div className="container">
+                    <FormEdit userEdit={this.state.userEdit}
+                        user={{ name, uname, addrCity, compName, idEdit }}
+                        onChange={this.setValue}
+                        saveUser={this.saveUser}
+                    />
+                    <div className="atas">
+                        <table cellPadding="0" cellSpacing="0" border="1" className="tabel" >
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Username</th>
+                                    <th>City</th>
+                                    <th>Company Name</th>
+                                    <th>Action</th>
+                                </tr >
+                            </thead>
+                            <tbody>
+                                {data}
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div className="bawah">
+                        <table cellPadding="0" cellSpacing="0" border="1" className="tabel">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Name Album</th>
+                                    <th>Photos</th>
+                                </tr >
+                            </thead>
+                            <tbody>
+                                {
+                                    <>
+                                        <tr>
+                                            <td>{1}</td>
+                                            <td>{this.state.album.title}</td>
+                                            <td>{this.state.albumphotos.map((el, key) =>
+                                                <a href={el.url}>
+                                                    <input type="button" value={key} />
+                                                </a>)}
+                                            </td>
+                                        </tr>
+                                    </>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
-                {<>
-
-                    id : {this.state.album.id} <br/>
-                    title : {this.state.album.title} <br/>
-                    photos: {this.state.albumphotos.map((el,key)=><a href={el.url}>{key}-</a>)}
-                </>
-                }
-            </>
             );
     }
 }
