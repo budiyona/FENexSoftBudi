@@ -65,10 +65,14 @@ class App extends Component {
         let url = 'https://jsonplaceholder.typicode.com/users/' + id + '/albums'
         fetch(url)
             .then(response => response.json())
-            .then(json => this.setState({ userAlbum: json, loading: false }))
+            .then(json => this.setState({ userAlbum: json, loadingAlbum: false }))
             .catch(() => {
                 alert("failed to fetch data")
-            })
+            }).finally(
+                this.setState({
+                    loadingAlbum: true
+                })
+            )
     }
     showPhotos = (idAlbum) => {
         let url = 'https://jsonplaceholder.typicode.com/albums/' + idAlbum + '/photos'
@@ -77,7 +81,11 @@ class App extends Component {
             .then(json => this.setState({ albumphotos: json, loading: false }))
             .catch(() => {
                 alert("failed to fetch data")
-            })
+            }).finally(
+                this.setState({
+                    loading: true
+                })
+            )
     }
     setValue = (name, value) => {
         console.log("SET VALUE TRIGERED");
@@ -154,17 +162,19 @@ class App extends Component {
 
                     </div>
                     <div className="bawah">
-                        <table cellPadding="0" cellSpacing="0" border="1" className="tabel">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Name Album</th>
-                                    <th>Photos</th>
-                                </tr >
-                            </thead>
-                            <tbody>
-                                {
-                                    this.state.userAlbum.map((el, key) =>
+                        {this.state.loadingAlbum 
+                        ? (<div>Loading</div>) :
+                            <table cellPadding="0" cellSpacing="0" border="1" className="tabel">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Name Album</th>
+                                        <th>Photos</th>
+                                    </tr >
+                                </thead>
+                                <tbody>
+
+                                    {this.state.userAlbum.map((el, key) =>
                                         <tr key={key}>
                                             <td>{key + 1}</td>
                                             <td>{el.title}</td>
@@ -173,15 +183,15 @@ class App extends Component {
                                                     onClick={() => this.showPhotos(el.id)} />
                                             </td>
                                         </tr>
-                                    )
-                                }
-                            </tbody>
-                        </table>
+                                    )}
+                                </tbody>
+                            </table>
+                        }
                     </div>
                     <div className="kotak-foto">
-                        {
-                            this.state.albumphotos.map(el =>
-                                <figure>
+                        {this.state.loading ? (<div>Loading</div>) :
+                            this.state.albumphotos.map((el,key) =>
+                                <figure key={key}>
                                     <img src={el.thumbnailUrl} alt={el.title}></img>
                                     <figcaption>{el.title}</figcaption>
                                 </figure>
